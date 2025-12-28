@@ -1,7 +1,7 @@
 from cmd import Cmd
 from queue import Queue
 
-from task_1.src.models.apprication import Apprication
+from task_1.src.models.application import Application
 
 
 def process_request(queue: Queue):
@@ -13,12 +13,12 @@ def process_request(queue: Queue):
 
 
 def generate_request(queue: Queue, params):
-    application = Apprication(params)
+    application = Application(params)
     queue.put(application)
     print("Request generated:", application)
 
 
-def all(queue: Queue):
+def all_requests(queue: Queue):
     applications = list(queue.queue)
     for application in applications:
         print(application)
@@ -35,8 +35,8 @@ class ApplicationManager(Cmd):
     def do_process_request(self, arg):
         process_request(self.queue)
 
-    def do_all(self, arg):
-        all(self.queue)
+    def do_all_requests(self, arg):
+        all_requests(self.queue)
 
     def do_quit(self, arg):
         print("Good bye!")
